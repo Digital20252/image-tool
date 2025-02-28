@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Free online image compression tool. Optimize your JPEG, PNG, SVG, or GIF images with the best quality and compression. See the compression difference!">
     <meta name="keywords" content="image compression, optimize images, image compressor, reduce image size, web optimization, compression difference">
-    <meta name="author" content="Your Name">
+    <meta name="author" content="image compression">
     <meta name="robots" content="index, follow">
     <title>Compress Image - Optimize Images Online</title>
     
@@ -59,6 +59,15 @@
         .format-text {
             color: #007bff; /* Blue color for JPG, PNG, SVG, GIF */
             text-decoration: underline; /* Underline the text */
+        }
+
+        .ad-space {
+            margin: 20px auto;
+            min-height: 90px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 900px; /* Wider ad spaces on desktop */
         }
 
         .controls {
@@ -153,6 +162,10 @@
                 width: 240px; /* Wider button on mobile */
                 padding: 12px 30px; /* Match desktop width for consistency */
             }
+            
+            .ad-space {
+                max-width: 100%;
+            }
 
             #compressionLevel {
                 max-width: 350px; /* Wider slider on mobile */
@@ -168,6 +181,7 @@
     <div class="container">
         <h1>Compress IMAGE</h1>
         <p>Compress <span class="format-text">JPG, PNG, SVG, or GIF</span> with the best quality and compression. <br> Reduce the filesize of your images at once.</p>
+        
         <!-- Top Ad Space (Note: AdSense requires valid publisher ID and slot) -->
         <div class="ad-space">
             <ins class="adsbygoogle"
@@ -180,6 +194,7 @@
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
+
         <div class="controls">
             <label for="imageInput" class="upload-button">
                 Select images
@@ -210,8 +225,8 @@
         <div class="compression-difference" id="compressionDifference">
             <!-- Will display file size difference here -->
         </div>
-    </div>
-    <!-- Bottom Ad Space (Note: AdSense requires valid publisher ID and slot) -->
+
+        <!-- Bottom Ad Space (Note: AdSense requires valid publisher ID and slot) -->
         <div class="ad-space">
             <ins class="adsbygoogle"
                 style="display:block"
@@ -224,6 +239,7 @@
             </script>
         </div>
     </div>
+
     <script>
         let compressedImageData = null;
         let originalFileSize = 0;
@@ -232,7 +248,6 @@
         // Update compression level display
         document.getElementById('compressionLevel').addEventListener('input', function() {
             document.getElementById('levelValue').textContent = this.value;
-            console.log('Compression level updated to:', this.value);
         });
 
         // Handle file selection or drop to show original image
