@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Free online image compression tool. Optimize your JPEG, PNG, SVG, or GIF images with the best quality and compression. See the compression difference!">
     <meta name="keywords" content="image compression, optimize images, image compressor, reduce image size, web optimization, compression difference">
-    <meta name="author" content="Jack">
+    <meta name="author" content="Your Name">
     <meta name="robots" content="index, follow">
     <title>Compress Image - Optimize Images Online</title>
     
@@ -176,17 +176,13 @@
             }
         }
     </style>
-
-    <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_PUBLISHER_ID"
-        crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
         <h1>Compress IMAGE</h1>
         <p>Compress <span class="format-text">JPG, PNG, SVG, or GIF</span> with the best quality and compression. <br> Reduce the filesize of your images at once.</p>
         
-        <!-- Top Ad Space -->
+        <!-- Top Ad Space (Note: AdSense requires valid publisher ID and slot) -->
         <div class="ad-space">
             <ins class="adsbygoogle"
                 style="display:block"
@@ -230,7 +226,7 @@
             <!-- Will display file size difference here -->
         </div>
 
-        <!-- Bottom Ad Space -->
+        <!-- Bottom Ad Space (Note: AdSense requires valid publisher ID and slot) -->
         <div class="ad-space">
             <ins class="adsbygoogle"
                 style="display:block"
@@ -260,7 +256,16 @@
 
         function handleImageSelect(event) {
             const file = event.target.files[0] || event.dataTransfer.files[0];
-            if (!file) return;
+            if (!file) {
+                console.error('No file selected or dropped.');
+                return;
+            }
+
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file (JPG, PNG, SVG, or GIF).');
+                return;
+            }
 
             // Store original file size in bytes
             originalFileSize = file.size;
@@ -280,6 +285,12 @@
                 document.getElementById('imagePreview').style.display = 'block';
                 document.getElementById('downloadSection').style.display = 'none'; // Hide download until compressed
                 document.getElementById('compressionDifference').textContent = ''; // Clear any previous compression difference
+                console.log('Original image loaded successfully.');
+            };
+
+            img.onerror = function() {
+                console.error('Failed to load the image.');
+                alert('Error loading the image. Please try a different file.');
             };
 
             img.src = URL.createObjectURL(file);
@@ -291,6 +302,7 @@
 
             if (!originalImageData) {
                 alert('Please select an image first!');
+                console.error('No original image data available for compression.');
                 return;
             }
 
@@ -316,6 +328,12 @@
 
                 // Calculate and display compression difference
                 showCompressionDifference();
+                console.log('Image compressed successfully.');
+            };
+
+            img.onerror = function() {
+                console.error('Failed to compress the image.');
+                alert('Error compressing the image. Please try again.');
             };
 
             img.src = originalImageData; // Use the stored original image data
@@ -360,7 +378,10 @@
 
         // Show compression difference
         function showCompressionDifference() {
-            if (!compressedImageData || originalFileSize === 0) return;
+            if (!compressedImageData || originalFileSize === 0) {
+                console.error('No data available to show compression difference.');
+                return;
+            }
 
             // Calculate compressed file size (approximate, based on data URL length)
             const compressedSize = (compressedImageData.length * 3 / 4) - (compressedImageData.endsWith('==') ? 2 : compressedImageData.endsWith('=') ? 1 : 0);
@@ -374,6 +395,7 @@
 
             const differenceText = `Original Size: ${formatSize(originalFileSize)} | Compressed Size: ${formatSize(compressedSize)} | Reduction: ${sizeReduction.toFixed(2)}%`;
             document.getElementById('compressionDifference').textContent = differenceText;
+            console.log('Compression difference displayed:', differenceText);
         }
 
         // Drag and drop functionality
@@ -393,6 +415,9 @@
             if (files.length > 0) {
                 document.getElementById('imageInput').files = files;
                 handleImageSelect(e); // Show original image on drop
+                console.log('Image dropped successfully.');
+            } else {
+                console.error('No files dropped.');
             }
         });
     </script>
